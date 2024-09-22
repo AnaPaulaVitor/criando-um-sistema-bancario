@@ -1,0 +1,50 @@
+saldo= 0.0
+limite_saque= 500.00
+saques_realizados= 0
+limite_saques_diarios= 3
+total_depositos= 0.0
+total_saques= 0.0
+while True:
+    print(f"""
+      ===== MENU =====
+        [1] Depósito
+        [2] Saque
+        [3] Extrato
+        [0] Sair 
+""")
+    opcao= input("Escolha o que deseja fazer: ")
+    if opcao== "1":
+        valor_deposito= float(input("Informe o valor a ser depositado: "))
+        if valor_deposito> 0:
+            total_depositos+= valor_deposito
+            saldo+= valor_deposito
+            print(f"Depósito de R$ {valor_deposito:.2f} realizado com sucesso!")
+        else:
+            print("Valor inválido para depoósito.")
+    elif opcao== "2":
+        if saques_realizados>= limite_saques_diarios:
+            print("Limite diário de saque atingido.")
+        else:
+            valor_saque= float(input("Informe o valor do saque: "))
+            if valor_saque> saldo:
+                print("Saldo insuficiente.")
+            elif valor_saque> limite_saque:
+                print(f"Valor máximo por saque é R$ {limite_saque:.2f}.")
+            else:
+                total_saques+= valor_saque
+                saldo-= valor_saque
+                saques_realizados+= 1
+                print(f"Saque de R$ {valor_saque:.2f} realizado com sucesso!")
+    elif opcao== "3":
+        print(f"""
+    ===== EXTRATO =====
+Total depositado: R$ {total_depositos:.2f}
+Total sacado: R$ {total_saques:.2f}
+Saldo atual: R$ {saldo:.2f}
+    ===================
+""")
+    elif opcao== "0":
+        print("Saindo do sistema...")
+        break
+    else:
+        print("Opção inválida. Tente novamente.")
